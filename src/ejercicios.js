@@ -242,20 +242,24 @@ function ajustarBrillo(matriz, factor) {
   // TODO: Implementar ajuste de brillo
   
   // 1. Crear matriz resultado
-  // const resultado = copiarMatriz(matriz);
+  const resultado = copiarMatriz(matriz);
   
   // 2. Para cada pixel, multiplicar R, G, B por el factor
-  // for (let i = 0; i < resultado.length; i++) {
-  //   for (let j = 0; j < resultado[i].length; j++) {
-  //     resultado[i][j].r = limitarValorColor(matriz[i][j].r * factor);
-  //     resultado[i][j].g = limitarValorColor(matriz[i][j].g * factor);
-  //     resultado[i][j].b = limitarValorColor(matriz[i][j].b * factor);
-  //     // El canal alpha NO se modifica
-  //   }
-  // }
+  for (let i = 0; i < resultado.length; i++) {
+    for (let j = 0; j < resultado[i].length; j++) {
+      const original = matriz[i][j];
+      resultado[i][j] = {
+        r: limitarValorColor(Math.round(original.r * factor)),
+        g: limitarValorColor(Math.round(original.g * factor)),
+        b: limitarValorColor(Math.round(original.b * factor)),
+        a: original.a
+      };
+    }
+  }
   
-  return []; // REEMPLAZAR
+  return resultado;
 }
+
 
 /**
  * Ejercicio 2.2: Invertir colores (8 puntos)
