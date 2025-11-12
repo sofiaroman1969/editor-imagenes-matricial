@@ -355,11 +355,14 @@ function convertirEscalaGrises(matriz) {
  */
 function voltearHorizontal(matriz) {
   // TODO: Implementar volteo horizontal
-  
-  // Pista: Puedes usar .reverse() en cada fila
-  // o construir manualmente invirtiendo el orden
-  
-  return []; // REEMPLAZAR
+  const resultado = copiarMatriz(matriz);
+
+  for (let i = 0; i < resultado.length; i++) {
+    // Si copiarMatriz devolviera referencias a los mismos arrays, hacemos una copia real
+    resultado[i] = resultado[i].slice().reverse();
+  }
+
+  return resultado;
 }
 
 /**
