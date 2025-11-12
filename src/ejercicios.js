@@ -409,12 +409,21 @@ function voltearVertical(matriz) {
  */
 function rotar90Grados(matriz) {
   // TODO: Implementar rotación de 90 grados
-  
-  // Opción 1: Hacer transpuesta manualmente considerando que son objetos
-  // Opción 2: Construir directamente la matriz rotada
-  //   nuevoPixel[j][alto - 1 - i] = pixelOriginal[i][j]
-  
-  return []; // REEMPLAZAR
+  const alto = matriz.length;
+  if (alto === 0) return [];
+  const ancho = matriz[0].length;
+
+  // Crear matriz vacía nueva de tamaño (ancho x alto)
+  const rotada = crearMatrizVacia(ancho, alto);
+
+  for (let i = 0; i < alto; i++) {
+    for (let j = 0; j < ancho; j++) {
+      // nuevo[j][alto - 1 - i] = original[i][j]
+      rotada[j][alto - 1 - i] = matriz[i][j];
+    }
+  }
+
+  return rotada;
 }
 
 // ============================================
