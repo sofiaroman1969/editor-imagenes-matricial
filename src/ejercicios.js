@@ -542,13 +542,36 @@ function detectarBordes(matriz, umbral = 50) {
   // TODO: Implementar detección de bordes
   
   // 1. Convertir a escala de grises primero
-  // const grises = convertirEscalaGrises(matriz);
-  
+  const grises = convertirEscalaGrises(matriz);
+  const alto = grises.length;
+  if (alto === 0) return [];
+  const ancho = grises[0].length;
+
   // 2. Para cada pixel (excepto bordes de la imagen):
   //    - Comparar con pixel derecho y pixel inferior
   //    - Si diferencia > umbral, marcar como borde
-  
-  return []; // REEMPLAZAR
+  const resultado = crearMatrizVacia(ancho, alto);
+
+  // Inicializar toda la matriz en negro por seguridad
+  for (let i = 0; i < alto; i++) {
+    for (let j = 0; j < ancho; j++) {
+      resultado[i][j] = { r: 0, g: 0, b: 0, a: 255 };
+    }
+  }
+
+  for (let i = 0; i < alto - 1; i++) {
+    for (let j = 0; j < ancho - 1; j++) {
+      const actual = Math.round(grises[i][j].r);
+      const derecha = Math.round(grises[i][j + 1].r);
+      const abajo = Math.round(grises[i + 1][j].r);
+      const diferencia = Math.max(Math.abs(actual - derecha), Math.abs(actual - abajo));
+      const valor = diferencia > umbral ? 255 : 0;
+      resultado[i][j] = { r: valor, g: valor, b: valor, a: 255 };
+    }
+  }
+
+  // Opcional: los bordes (última fila/columna) ya quedan en negro (0)
+  return resultado;
 }
 
 // ============================================
